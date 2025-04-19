@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>End..??!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .terminal {
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 0 20px #0f0;
+      width: 90%;
+      max-width: 800px;
+      white-space: pre-line;
+      text-align: left;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fade-out {
+      animation: fadeOut 1.5s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+    }
+
+    @keyframes fadeTransmit {
+      0%   { opacity: 1; transform: none; }
+      30%  { opacity: 0.7; transform: skewX(5deg); }
+      60%  { opacity: 0.4; transform: translateY(-2px); }
+      100% { opacity: 0; transform: scale(0.95); }
+    }
+
+    .fade-transmit {
+      animation: fadeTransmit 1.5s ease forwards;
+    }
+
+    .message {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #0f0;
+    }
+
+    .pure-black {
+      background-color: #000 !important;
+    }
+
+    .glitch {
+      color: #0f0;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 blue; }
+      40% { text-shadow: 2px 2px red; }
+      60% { text-shadow: -2px -2px blue; }
+      80% { text-shadow: 1px -1px red; }
+      100% { text-shadow: -1px 1px blue; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="terminal" id="terminalMessage">
+    > Welcome, Contestant...  
+    > Puzzle complete.  
+    > But not all threads are meant to be tied.  
+
+    > Data anomaly detected...  
+    > Decryption complete: ██ ████ ██ ██ ███████  
+
+    > A shadow lingers in the code...  
+    > Listening. Watching. Evolving.  
+
+    > This is not the end. It's a checkpoint.  
+
+    > Next transmission: <span class="glitch">UNDEFINED</span>  
+    > Await further instructions... or don’t.  
+
+    > // SYSTEM STANDBY...
+  </div>
+
+  <div class="message hidden" id="theyKnow">They know you found Us.</div>
+
+  <script>
+    setTimeout(() => {
+      const terminal = document.getElementById('terminalMessage');
+      terminal.classList.add('fade-out');
+
+      setTimeout(() => {
+        terminal.classList.add('hidden');
+        const message = document.getElementById('theyKnow');
+        message.classList.remove('hidden');
+
+        setTimeout(() => {
+          message.classList.add('fade-transmit');
+
+          setTimeout(() => {
+            document.body.innerHTML = '';
+            document.body.classList.add('pure-black');
+          }, 1500); // wait for message fade-transmit
+        }, 5000); // how long message stays before fade-transmit
+      }, 1500); // wait for terminal fade out
+    }, 25000); // initial wait time
+  </script>
+    <script>
+        // Block right click
+        document.addEventListener('contextmenu', e => e.preventDefault());// Block inspect and view source shortcuts
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I','C','J'].includes(e.key.toUpperCase())) ||
+        (e.metaKey && e.altKey && e.key.toUpperCase() === 'I') || // macOS dev tools
+        (e.ctrlKey && e.key.toUpperCase() === 'U') ||
+        (e.metaKey && e.key.toUpperCase() === 'U')
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    });
+    
+    // Prevent form resubmission/data persistence on refresh
+    window.addEventListener('beforeunload', function () {
+      sessionStorage.clear();
+    });
+    
+      </script>
+</body>
+</html>
